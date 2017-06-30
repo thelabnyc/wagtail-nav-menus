@@ -81,3 +81,7 @@ Use this to get the menu as a json object.
 {% get_nav_menu_json 'top' as top %}
 <div data-menu='{{ top }}'></div>
 ```
+
+# Changelog
+
+1.1 - added "menu_name" context variable to template tag

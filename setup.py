@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="wagtail-nav-menus",
-    version="1.0.0",
+    version="1.0.1",
     author="David Burke",
     author_email="david@thelabnyc.com",
     description="Wagtail Nav Menus is a app to provide highly customizable menus in wagtail by leveraging StreamFields.",
@@ -16,7 +16,7 @@ setup(
         'Environment :: Web Environment',
         'Framework :: Django',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3',
         'Intended Audience :: Developers',
         "License :: OSI Approved :: Apache Software License",
     ],

@@ -10,6 +10,7 @@ def get_nav_menu(context, menu_name, calling_page=None):
     return {
         'calling_page': calling_page,
         'menu_items': nav_menu.menu,
+        'menu_name': nav_menu.name,
         'request': context['request'],
     }
 
