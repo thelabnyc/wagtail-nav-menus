@@ -17,9 +17,9 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import include, url
-from wagtail.wagtailcore import urls as wagtail_urls
-from wagtail.wagtailadmin import urls as wagtailadmin_urls
-from wagtail.wagtailsearch.signal_handlers import register_signal_handlers as wagtailsearch_register_signal_handlers
+from wagtail.core import urls as wagtail_urls
+from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.search.signal_handlers import register_signal_handlers as wagtailsearch_register_signal_handlers
 wagtailsearch_register_signal_handlers()
 
 urlpatterns = [

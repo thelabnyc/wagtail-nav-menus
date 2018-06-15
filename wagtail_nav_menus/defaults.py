@@ -3,8 +3,8 @@ WAGTAIL_NAV_MENU_TYPES_DEFAULT = [
     ('external_link', 'wagtail_nav_menus.models', 'ExternalPageBlock'),
     ('django_url', 'wagtail_nav_menus.models', 'DjangoURLBlock'),
     ('relative_url', 'wagtail_nav_menus.models', 'RelativeURLBlock'),
-    ('image', 'wagtail.wagtailimages.blocks', 'ImageChooserBlock'),
-    ('html', 'wagtail.wagtailcore.blocks', 'RawHTMLBlock'),
+    ('image', 'wagtail.images.blocks', 'ImageChooserBlock'),
+    ('html', 'wagtail.core.blocks', 'RawHTMLBlock'),
 ]
 
 WAGTAIL_NAV_MENU_CHOICES_DEFAULT = (

@@ -3,9 +3,9 @@ from django.db import models
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.core.urlresolvers import NoReverseMatch
-from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.core.fields import StreamField
+from wagtail.core import blocks
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
 from .loading import get_class
 from .utils import date_handler
 from .defaults import (
