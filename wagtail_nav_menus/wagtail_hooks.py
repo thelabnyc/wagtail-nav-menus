@@ -11,4 +11,5 @@ class NavMenuAdmin(ModelAdmin):
     add_to_settings_menu = True  # or True to add your model to the Settings sub-menu
     list_display = ('name',)
 
+
 modeladmin_register(NavMenuAdmin)
