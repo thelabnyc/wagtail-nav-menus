@@ -23,7 +23,7 @@ from wagtail.search.signal_handlers import register_signal_handlers as wagtailse
 wagtailsearch_register_signal_handlers()
 
 urlpatterns = [
-    url(r'^django-admin/', include(admin.site.urls)),
+    url(r'^django-admin/', admin.site.urls),
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'', include(wagtail_urls)),
 ]

@@ -17,7 +17,7 @@ class NavMenuTestCase(TestCase):
                     'open_in_new_tab': False, 'page': 1, 'override_title': ''}},
             ]}},
         ]
-    
+
     def json_after_create_menu(self, json_for_create):
         menu = NavMenu.objects.create(
             name="top",
@@ -87,7 +87,7 @@ class NavMenuTestCase(TestCase):
                     'expired': False,
                     'go_live_at': None,
                     'last_published_at': None,
-                    'live_revision' : None,
+                    'live_revision': None,
                 },
                 'open_in_new_tab': False,
                 'override_title': ''}

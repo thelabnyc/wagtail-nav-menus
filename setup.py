@@ -23,5 +23,11 @@ setup(
     ],
     install_requires=[
         'wagtail>=2.0.0',
-    ]
+    ],
+    extras_require={
+        'development': [
+            'flake8>=3.3.0',
+            'tox>=2.7.0',
+        ],
+    },
 )
