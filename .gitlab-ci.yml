@@ -1,17 +1,24 @@
-before_script:
-  - pip install tox
+include:
+  - project: thelabnyc/gitlab-ci-templates
+    file: /ci/sast.gitlab-ci.yml
 
 test_python35:
   stage: test
   image: python:3.5
-  script: tox --skip-missing-interpreters
+  script:
+    - pip install tox
+    - tox --skip-missing-interpreters
 
 test_python36:
   stage: test
   image: python:3.6
-  script: tox --skip-missing-interpreters
+  script:
+    - pip install tox
+    - tox --skip-missing-interpreters
 
 test_pypy35:
   stage: test
   image: pypy:3-5
-  script: tox --skip-missing-interpreters
+  script:
+    - pip install tox
+    - tox --skip-missing-interpreters
