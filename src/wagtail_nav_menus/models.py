@@ -3,13 +3,16 @@ from django.db import models
 from django.conf import settings
 from django.urls import reverse
 from django.urls import NoReverseMatch
+from django.utils.translation import gettext_lazy as _
 from wagtail.core.fields import StreamField
 from wagtail.core import blocks
 from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
 from .loading import get_class
 from .utils import date_handler
 from .defaults import (
-    WAGTAIL_NAV_MENU_TYPES_DEFAULT, WAGTAIL_NAV_MENU_CHOICES_DEFAULT)
+    WAGTAIL_NAV_MENU_TYPES_DEFAULT,
+    WAGTAIL_NAV_MENU_CHOICES_DEFAULT,
+)
 
 
 NAV_MENU_CHOICES = getattr(
@@ -31,6 +34,10 @@ class AbstractPageBlock(blocks.StructBlock):
 class InternalPageBlock(AbstractPageBlock):
     page = blocks.PageChooserBlock()
 
+    class Meta:
+        # Translators: Navigation Menu Item Type
+        verbose_name = _('Internal Page Block')
+
     def get_serializable_data(self, obj):
         page = obj['page']
         result = obj
@@ -42,11 +49,19 @@ class InternalPageBlock(AbstractPageBlock):
 class ExternalPageBlock(AbstractPageBlock):
     link = blocks.URLBlock()
 
+    class Meta:
+        # Translators: Navigation Menu Item Type
+        verbose_name = _('External Page Block')
+
 
 class DjangoURLBlock(AbstractPageBlock):
     """ A link that is generated from a Django reverse URL lookup
     """
     url_name = blocks.CharBlock()
+
+    class Meta:
+        # Translators: Navigation Menu Item Type
+        verbose_name = _('Django URL Block')
 
     def get_serializable_data(self, obj):
         url_name = obj['url_name']
@@ -65,6 +80,10 @@ class RelativeURLBlock(AbstractPageBlock):
     link = blocks.RegexBlock(regex=URL_REGEX, error_mesage={
         'invalid': "Not a relative URL"
     })
+
+    class Meta:
+        # Translators: Navigation Menu Item Type
+        verbose_name = _('Relative URL Block')
 
 
 NAV_MENU_TYPES = getattr(
@@ -87,6 +106,8 @@ class NavCategoryBlock(blocks.StructBlock):
     class Meta:
         icon = 'list-ul'
         template = 'nav_menus/nav_category.html'
+        # Translators: Content Block Name
+        verbose_name = _('Navigation Menu Category Block')
 
 
 class NavMenu(models.Model):
@@ -102,6 +123,12 @@ class NavMenu(models.Model):
         FieldPanel('name'),
         StreamFieldPanel('menu'),
     ]
+
+    class Meta:
+        # Translators: Model Name (singular)
+        verbose_name = _('Navigation Menu')
+        # Translators: Model Name (plural)
+        verbose_name_plural = _('Navigation Menus')
 
     def __str__(self):
         return self.name
