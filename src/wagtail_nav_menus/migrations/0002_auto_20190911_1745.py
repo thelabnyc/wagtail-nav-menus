@@ -25,7 +25,7 @@ def do_nothing(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wagtailcore', '0041_group_collection_permissions_verbose_name_plural'),
+        ('wagtailcore', '0040_page_draft_title'),
         ('wagtail_nav_menus', '0001_initial'),
     ]
 
