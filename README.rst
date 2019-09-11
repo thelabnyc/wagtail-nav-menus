@@ -80,3 +80,17 @@ Use this to get the menu as a json object. ::
     {% load nav_menu_tags %}
     {% get_nav_menu_json 'top' as top %}
     <div data-menu='{{ top }}'></div>
+
+API Usage
+---------
+
+If using Django Rest Framework to access the menu data, this module provides some tools to get started.
+
+Making a ViewSet with NavMenuSerializer: ::
+
+    from wagtail_nav_menus.serializers import NavMenuSerializer
+    ...
+
+    class NavMenuViewSet(viewsets.ReadOnlyModelViewSet):
+        queryset = NavMenu.objects.all()
+        serializer_class = NavMenuSerializer
