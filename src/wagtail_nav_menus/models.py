@@ -110,16 +110,27 @@ class NavCategoryBlock(blocks.StructBlock):
         verbose_name = _('Navigation Menu Category Block')
 
 
+def site_default():
+    return {"is_default_site": True}
+
+
 class NavMenu(models.Model):
+    site = models.ForeignKey(
+        'wagtailcore.Site',
+        db_index=True,
+        on_delete=models.CASCADE,
+        default=site_default
+    )
     name = models.CharField(
         max_length=50,
         choices=NAV_MENU_CHOICES,
-        unique=True)
+    )
     menu = StreamField([
         ('nav_category', NavCategoryBlock()),
     ] + nav_content)
 
     panels = [
+        FieldPanel('site'),
         FieldPanel('name'),
         StreamFieldPanel('menu'),
     ]
@@ -129,6 +140,7 @@ class NavMenu(models.Model):
         verbose_name = _('Navigation Menu')
         # Translators: Model Name (plural)
         verbose_name_plural = _('Navigation Menus')
+        unique_together = ('site', 'name',)
 
     def __str__(self):
         return self.name

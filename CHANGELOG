@@ -1,3 +1,7 @@
+# 3.0
+
+Potentially breaking change - added Site foreign key to nav menus to enable different menus per site. Migration will attepmt to set this new required field to the default wagtail site.
+
 # 2.0
 
 Breaking change - support wagtail 2.x. For wagtail 1.x use version 1.1.

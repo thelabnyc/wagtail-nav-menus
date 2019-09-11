@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'taggit',
     'modelcluster',
 
+    'sandbox',
     'wagtail.core',
     'wagtail.admin',
     'wagtail.documents',
@@ -36,8 +37,6 @@ INSTALLED_APPS = [
     'wagtail.contrib.modeladmin',
 
     'wagtail_nav_menus',
-
-    'sandbox',
 ]
 
 MIDDLEWARE = [
