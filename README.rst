@@ -38,7 +38,7 @@ You can add other streamfields like this: ::
 
     from wagtail_nav_menus.defaults import WAGTAIL_NAV_MENU_TYPES_DEFAULT
 
-    WAGTAIL_NAV_MENU_TYPES = NAV_MENU_TYPES_DEFAULT + [
+    WAGTAIL_NAV_MENU_TYPES = WAGTAIL_NAV_MENU_TYPES_DEFAULT + [
         ('page_link_with_image', 'nav_menus_ext.models', 'InternalPageImageBlock'),
         ('page_link_with_image', 'nav_menus_ext.models', 'NavAdvertBlock'),
     ]
