@@ -6,6 +6,7 @@ from django.urls import NoReverseMatch
 from django.utils.translation import gettext_lazy as _
 from wagtail.core.fields import StreamField
 from wagtail.core import blocks
+from wagtail.core.models import Site
 from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
 from .loading import get_class
 from .utils import date_handler
@@ -111,7 +112,7 @@ class NavCategoryBlock(blocks.StructBlock):
 
 
 def site_default():
-    return {"is_default_site": True}
+    return Site.objects.filter(is_default_site=True).first()
 
 
 class NavMenu(models.Model):
