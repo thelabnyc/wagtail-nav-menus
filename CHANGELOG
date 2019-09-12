@@ -2,6 +2,7 @@
 
 - Potentially breaking change - added Site foreign key to nav menus to enable different menus per site. Migration will attepmt to set this new required field to the default wagtail site.
 - Added optional rest framework serializer
+- Added optional rest framework viewset
 
 # 2.0
 
