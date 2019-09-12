@@ -86,11 +86,7 @@ API Usage
 
 If using Django Rest Framework to access the menu data, this module provides some tools to get started.
 
-Making a ViewSet with NavMenuSerializer: ::
+Add NavMenuViewSet to your Rest Framework Router. ::
 
-    from wagtail_nav_menus.serializers import NavMenuSerializer
-    ...
+    from wagtail_nav_menus.viewsets import NavMenuViewSet
 
-    class NavMenuViewSet(viewsets.ReadOnlyModelViewSet):
-        queryset = NavMenu.objects.all()
-        serializer_class = NavMenuSerializer

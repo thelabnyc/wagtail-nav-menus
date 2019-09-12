@@ -1,4 +1,7 @@
 from django.test import TestCase
+from rest_framework.test import APIRequestFactory
+from wagtail.core.models import Site, Page
+from .viewsets import NavMenuViewSet
 from .models import NavMenu
 import json
 
@@ -171,3 +174,44 @@ class NavMenuTestCase(TestCase):
         NavMenu.objects.create(name="bottom", menu=json_menu)
         res = self.client.get('/')
         self.assertEqual(res.status_code, 200)
+
+
+
+class NavMenuViewSetTestCase(TestCase):
+    def test_nav_menu_viewset(self):
+        request = APIRequestFactory().get("")
+        request.site = Site.objects.all().first()
+        nav_detail = NavMenuViewSet.as_view({'get': 'retrieve'})
+        nav = NavMenu.objects.create(name="top")
+        response = nav_detail(request, pk=nav.pk)
+        self.assertContains(response, nav.name)
+
+    def test_nav_menu_viewset_site(self):
+        """
+        Nav API should support Wagtail Sites and return only sites as specific
+        """
+        request = APIRequestFactory().get("")
+        page = Page.objects.all().last()
+        default_site = Site.objects.all().first()
+        request.site = Site.objects.create(hostname="example.com", port=80, root_page=page)
+        nav_detail = NavMenuViewSet.as_view({'get': 'list'})
+        nav_default_site = NavMenu.objects.create(name="default", site=default_site)
+        nav_other_site = NavMenu.objects.create(name="other", site=request.site)
+        response = nav_detail(request)
+        self.assertContains(response, nav_other_site.name)
+        self.assertNotContains(response, nav_default_site.name)
+
+    def test_nav_menu_viewset_site_filter(self):
+        """
+        Nav API should allow site filter override
+        """
+        request = APIRequestFactory().get("?site=2")
+        page = Page.objects.all().last()
+        default_site = Site.objects.all().first()
+        other_site = Site.objects.create(hostname="example.com", port=80, root_page=page)
+        nav_detail = NavMenuViewSet.as_view({'get': 'list'})
+        nav_default_site = NavMenu.objects.create(name="default", site=default_site)
+        nav_other_site = NavMenu.objects.create(name="other", site=other_site)
+        response = nav_detail(request)
+        self.assertContains(response, nav_other_site.name)
+        self.assertNotContains(response, nav_default_site.name)
