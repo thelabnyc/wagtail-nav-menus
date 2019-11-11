@@ -114,6 +114,7 @@ class NavCategoryBlock(blocks.StructBlock):
 def site_default():
     return Site.objects.filter(is_default_site=True).first()
 
+
 def site_default_id():
     """ Not sure why this is needed for migrations, there is probably a better way. """
     site = site_default()
