@@ -115,7 +115,7 @@ def site_default():
     return Site.objects.filter(is_default_site=True).first()
 
 
-class NavMenu(models.Model):
+class AbstractNavMenu(models.Model):
     site = models.ForeignKey(
         'wagtailcore.Site',
         db_index=True,
@@ -142,6 +142,7 @@ class NavMenu(models.Model):
         # Translators: Model Name (plural)
         verbose_name_plural = _('Navigation Menus')
         unique_together = ('site', 'name',)
+        abstract = True
 
     def __str__(self):
         return self.name
@@ -175,3 +176,7 @@ class NavMenu(models.Model):
         for stream_field in self.menu:
             result.append(self.stream_field_to_json(stream_field))
         return json.dumps(result, default=date_handler)
+
+
+class NavMenu(AbstractNavMenu):
+    pass

@@ -1,6 +1,10 @@
+# 3.1
+
+- Added Abstract model for NavMenu to make extensions easier
+
 # 3.0
 
-- Potentially breaking change - added Site foreign key to nav menus to enable different menus per site. Migration will attepmt to set this new required field to the default wagtail site.
+- Potentially breaking change - added Site foreign key to nav menus to enable different menus per site. Migration will attempt to set this new required field to the default wagtail site.
 - Added optional rest framework serializer
 - Added optional rest framework viewset
 
