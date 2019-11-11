@@ -149,6 +149,7 @@ class AbstractNavMenu(models.Model):
         verbose_name_plural = _('Navigation Menus')
         unique_together = ('site', 'name',)
         abstract = True
+        app_label = 'wagtail_nav_menus'
 
     def __str__(self):
         return self.name
