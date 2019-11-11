@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='navmenu',
             name='site',
-            field=models.ForeignKey(default=wagtail_nav_menus.models.site_default, on_delete=django.db.models.deletion.CASCADE, to='wagtailcore.Site'),
+            field=models.ForeignKey(default=wagtail_nav_menus.models.site_default_id, on_delete=django.db.models.deletion.CASCADE, to='wagtailcore.Site'),
         ),
     ]
