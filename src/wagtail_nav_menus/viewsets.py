@@ -10,12 +10,13 @@ class NavMenuViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         site_id = self.request.GET.get('site', None)
+        site = Site.find_for_request(self.request)
         if site_id:
             try:
-                self.request.site = Site.objects.get(id=site_id)
+                site = Site.objects.get(id=site_id)
             except Site.DoesNotExist:
                 pass
         qs = super().get_queryset()
-        if self.request.site:
-            qs = qs.filter(site=self.request.site)
+        if site:
+            qs = qs.filter(site=site)
         return qs
