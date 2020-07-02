@@ -4,6 +4,7 @@ from wagtail.core.models import Site, Page
 from .viewsets import NavMenuViewSet
 from .models import NavMenu
 import json
+import wagtail
 
 
 class NavMenuTestCase(TestCase):
@@ -95,6 +96,10 @@ class NavMenuTestCase(TestCase):
                 'open_in_new_tab': False,
                 'override_title': ''}
         }
+        # Page schema added a few fields in Wagtail 2.8
+        if wagtail.VERSION[0] == 2 and wagtail.VERSION[1] >= 8:
+            expected['value']['page']['locked_at'] = None
+            expected['value']['page']['locked_by'] = None
         result = self.json_after_create_menu(source)
         self.assertEqual(result, expected)
 
@@ -152,6 +157,10 @@ class NavMenuTestCase(TestCase):
                 }]
             }
         }
+        # Page schema added a few fields in Wagtail 2.8
+        if wagtail.VERSION[0] == 2 and wagtail.VERSION[1] >= 8:
+            expected['value']['sub_nav'][0]['value']['page']['locked_at'] = None
+            expected['value']['sub_nav'][0]['value']['page']['locked_by'] = None
         result = self.json_after_create_menu(source)
         self.assertDictEqual(result, expected)
 
@@ -180,7 +189,6 @@ class NavMenuTestCase(TestCase):
 class NavMenuViewSetTestCase(TestCase):
     def test_nav_menu_viewset(self):
         request = APIRequestFactory().get("")
-        request.site = Site.objects.all().first()
         nav_detail = NavMenuViewSet.as_view({'get': 'retrieve'})
         nav = NavMenu.objects.create(name="top")
         response = nav_detail(request, pk=nav.pk)
@@ -190,13 +198,17 @@ class NavMenuViewSetTestCase(TestCase):
         """
         Nav API should support Wagtail Sites and return only sites as specific
         """
-        request = APIRequestFactory().get("")
         page = Page.objects.all().last()
         default_site = Site.objects.all().first()
-        request.site = Site.objects.create(hostname="example.com", port=80, root_page=page)
+        other_site = Site.objects.create(hostname="example.com", port=80, root_page=page)
+        rdata = {
+            'SERVER_NAME': other_site.hostname,
+        }
+        rfactory = APIRequestFactory(**rdata)
+        request = rfactory.get("")
         nav_detail = NavMenuViewSet.as_view({'get': 'list'})
         nav_default_site = NavMenu.objects.create(name="default", site=default_site)
-        nav_other_site = NavMenu.objects.create(name="other", site=request.site)
+        nav_other_site = NavMenu.objects.create(name="other", site=other_site)
         response = nav_detail(request)
         self.assertContains(response, nav_other_site.name)
         self.assertNotContains(response, nav_default_site.name)
@@ -205,10 +217,14 @@ class NavMenuViewSetTestCase(TestCase):
         """
         Nav API should allow site filter override
         """
-        request = APIRequestFactory().get("?site=2")
         page = Page.objects.all().last()
         default_site = Site.objects.all().first()
         other_site = Site.objects.create(hostname="example.com", port=80, root_page=page)
+        rdata = {
+            'SERVER_NAME': other_site.hostname,
+        }
+        rfactory = APIRequestFactory(**rdata)
+        request = rfactory.get("?site=2")
         nav_detail = NavMenuViewSet.as_view({'get': 'list'})
         nav_default_site = NavMenu.objects.create(name="default", site=default_site)
         nav_other_site = NavMenu.objects.create(name="other", site=other_site)

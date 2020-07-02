@@ -1,11 +1,12 @@
 from django.utils.translation import ugettext_lazy as _
+import wagtail
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '=s*jlqd3sro3fj$(m3o&il5sydp71nh@z^=ozjz=_5l5$704x7'
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 ROOT_URLCONF = 'sandbox.urls'
 
@@ -48,8 +49,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    'wagtail.core.middleware.SiteMiddleware',
+]
+if wagtail.VERSION[0] == 2 and wagtail.VERSION[1] < 9:
+    MIDDLEWARE += [
+        'wagtail.core.middleware.SiteMiddleware',
+    ]
+MIDDLEWARE += [
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 

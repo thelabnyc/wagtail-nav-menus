@@ -1,4 +1,5 @@
 from django import template
+from wagtail.core.models import Site
 from ..models import NavMenu
 
 register = template.Library()
@@ -6,7 +7,7 @@ register = template.Library()
 
 @register.inclusion_tag('nav_menus/tags/menu.html', takes_context=True)
 def get_nav_menu(context, menu_name, calling_page=None):
-    site = context.request.site
+    site = Site.find_for_request(context.request)
     nav_menu = NavMenu.objects.get_or_create(name=menu_name, site=site)[0]
     return {
         'calling_page': calling_page,
@@ -18,6 +19,6 @@ def get_nav_menu(context, menu_name, calling_page=None):
 
 @register.simple_tag(takes_context=True)
 def get_nav_menu_json(context, menu_name):
-    site = context.request.site
+    site = Site.find_for_request(context.request)
     nav_menu = NavMenu.objects.get_or_create(name=menu_name, site=site)[0]
     return nav_menu.to_json()
