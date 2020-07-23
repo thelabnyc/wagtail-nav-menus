@@ -1,3 +1,7 @@
+# 3.2
+
+- Add wagtail 2.9 support
+
 # 3.1
 
 - Added Abstract model for NavMenu to make extensions easier
