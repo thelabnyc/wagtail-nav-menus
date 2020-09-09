@@ -127,7 +127,7 @@ class AbstractNavMenu(models.Model):
         'wagtailcore.Site',
         db_index=True,
         on_delete=models.CASCADE,
-        default=site_default
+        default=site_default_id
     )
     name = models.CharField(
         max_length=50,
