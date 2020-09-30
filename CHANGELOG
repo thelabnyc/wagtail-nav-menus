@@ -1,3 +1,10 @@
+# 3.3
+
+Thanks @jaap3 for everything in this release
+
+- Add wagtail 2.10 support
+- Fix bug that caused unnecessary migrations to be created
+
 # 3.2
 
 - Add wagtail 2.9 support
