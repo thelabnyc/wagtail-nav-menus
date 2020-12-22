@@ -21,6 +21,7 @@ class NavMenuTestCase(TestCase):
                     'open_in_new_tab': False, 'page': 1, 'override_title': ''}},
             ]}},
         ]
+        self.maxDiff = None
 
     def json_after_create_menu(self, json_for_create):
         menu = NavMenu.objects.create(
@@ -96,12 +97,11 @@ class NavMenuTestCase(TestCase):
                 'open_in_new_tab': False,
                 'override_title': ''}
         }
-        # Page schema added a few fields in Wagtail 2.8
-        if wagtail.VERSION[0] == 2 and wagtail.VERSION[1] >= 8:
-            expected['value']['page']['locked_at'] = None
-            expected['value']['page']['locked_by'] = None
         result = self.json_after_create_menu(source)
-        self.assertEqual(result, expected)
+        self.assertEqual(result["type"], expected["type"])
+        self.assertEqual(result["value"]["open_in_new_tab"], expected["value"]["open_in_new_tab"])
+        self.assertEqual(result["value"]["override_title"], expected["value"]["override_title"])
+        self.assertEqual(result["value"]["page"]["slug"], expected["value"]["page"]["slug"])
 
     def test_nav_category(self):
         source = {
@@ -162,7 +162,17 @@ class NavMenuTestCase(TestCase):
             expected['value']['sub_nav'][0]['value']['page']['locked_at'] = None
             expected['value']['sub_nav'][0]['value']['page']['locked_by'] = None
         result = self.json_after_create_menu(source)
-        self.assertDictEqual(result, expected)
+        self.assertEqual(result["type"], expected["type"])
+        self.assertEqual(result["value"]["title"], expected["value"]["title"])
+        self.assertEqual(result["value"]["sub_nav"][0]["type"], expected["value"]["sub_nav"][0]["type"])
+        self.assertEqual(
+            result["value"]["sub_nav"][0]["value"]["open_in_new_tab"],
+            expected["value"]["sub_nav"][0]["value"]["open_in_new_tab"]
+        )
+        self.assertEqual(
+            result["value"]["sub_nav"][0]["value"]["page"]["slug"],
+            expected["value"]["sub_nav"][0]["value"]["page"]["slug"]
+        )
 
     def test_menu_json(self):
         """ Test serializing and deserializing the menu json """
