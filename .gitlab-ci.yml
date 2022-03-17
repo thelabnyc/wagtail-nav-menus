@@ -36,7 +36,7 @@ publish_pkg:
     - python setup.py sdist bdist_wheel
     # Publish to PyPI
     - export TWINE_USERNAME=__token__
-    - export TWINE_PASSWORD=${PYPI_TOKEN}
+    - export TWINE_PASSWORD=$PYPI_TOKEN
     - python -m twine upload --verbose dist/*
     # Publish to Gitlab
     - export TWINE_USERNAME=gitlab-ci-token
