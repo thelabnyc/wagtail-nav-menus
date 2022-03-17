@@ -1,5 +1,5 @@
 stages:
-  # - test
+  - test
   - release
 
 cache:
@@ -7,37 +7,39 @@ cache:
   paths:
     - $HOME/.cache/pip
 
-# test:
-#   stage: test
-#   tags:
-#     - django-oscar
-#   image: $IMAGE
-#   script:
-#     - pip install tox
-#     - tox -e $TOX_ENVS
-#   parallel:
-#     matrix:
-#       - IMAGE: python:3.7
-#         TOX_ENVS: py37-django{220,310}-wagtail{211,212},py37-django{320}-wagtail{213}
+test:
+  stage: test
+  tags:
+    - django-oscar
+  image: $IMAGE
+  script:
+    - pip install tox
+    - tox -e $TOX_ENVS
+  parallel:
+    matrix:
+      - IMAGE: python:3.7
+        TOX_ENVS: py37-django{220,310}-wagtail{211,212},py37-django{320}-wagtail{213}
 
-#       - IMAGE: python:3.8
-#         TOX_ENVS: py38-django{220,310}-wagtail{211,212},py38-django{320}-wagtail{213}
+      - IMAGE: python:3.8
+        TOX_ENVS: py38-django{220,310}-wagtail{211,212},py38-django{320}-wagtail{213}
 
-#       - IMAGE: python:3.9
-#         TOX_ENVS: py39-django{220,310}-wagtail{211,212},py39-django{320}-wagtail{213},py39-django{320}-wagtail{216}
+      - IMAGE: python:3.9
+        TOX_ENVS: py39-django{220,310}-wagtail{211,212},py39-django{320}-wagtail{213},py39-django{320}-wagtail{216}
 
 publish_pkg:
   image: python:3.9
   stage: release
-  # rules:
-  #   - if: $CI_COMMIT_TAG && $CI_COMMIT_REF_PROTECTED
+  rules:
+    - if: $CI_COMMIT_TAG && $CI_COMMIT_REF_PROTECTED
   script:
     - pip install twine
     - python setup.py sdist bdist_wheel
     # Publish to PyPI
     - export TWINE_USERNAME=__token__
-    - export TWINE_PASSWORD=$PYPI_TOKEN
-    - python -m twine upload --verbose dist/*
+    - export TWINE_PASSWORD=${PYPI_TOKEN}
+    - python -m twine upload
+        --repository-url https://upload.pypi.org/legacy/
+        dist/*
     # Publish to Gitlab
     - export TWINE_USERNAME=gitlab-ci-token
     - export TWINE_PASSWORD=${CI_JOB_TOKEN}
