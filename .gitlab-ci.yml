@@ -38,7 +38,7 @@ publish_pkg:
     - export TWINE_USERNAME=__token__
     - export TWINE_PASSWORD=${PYPI_TOKEN}
     - python -m twine upload
-        --repository wagtail-nav-menus
+        --repository-url https://upload.pypi.org/legacy/
         dist/*
     # Publish to Gitlab
     - export TWINE_USERNAME=gitlab-ci-token
