@@ -7,7 +7,7 @@ WAGTAIL_NAV_MENU_TYPES_DEFAULT = [
     ('html', 'wagtail.core.blocks', 'RawHTMLBlock'),
 ]
 
-WAGTAIL_NAV_MENU_CHOICES_DEFAULT = (
+WAGTAIL_NAV_MENU_CHOICES_DEFAULT = [
     ("top", "Top"),
     ("footer", "Footer"),
-)
+]

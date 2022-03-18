@@ -100,9 +100,21 @@ for name, module_label, class_name in NAV_MENU_TYPES:
     )
 
 
+NAV_CATEGORY_TYPES = getattr(
+    settings,
+    'WAGTAIL_NAV_MENU_CATEGORY_TYPES',
+    []
+)
+custom_category_content = []
+for name, module_label, class_name in NAV_CATEGORY_TYPES:
+    custom_category_content.append(
+        (name, get_class(module_label, class_name)()),
+    )
+
+
 class NavCategoryBlock(blocks.StructBlock):
     title = blocks.CharBlock()
-    sub_nav = blocks.StreamBlock(nav_content)
+    sub_nav = blocks.StreamBlock(nav_content + custom_category_content)
 
     class Meta:
         icon = 'list-ul'
