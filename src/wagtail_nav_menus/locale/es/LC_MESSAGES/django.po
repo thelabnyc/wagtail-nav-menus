@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-26 20:44+0000\n"
+"POT-Creation-Date: 2022-03-18 18:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,17 +44,17 @@ msgid "Relative URL Block"
 msgstr ""
 
 #. Translators: Content Block Name
-#: wagtail_nav_menus/models.py:111
+#: wagtail_nav_menus/models.py:123
 msgid "Navigation Menu Category Block"
 msgstr ""
 
 #. Translators: Model Name (singular)
-#: wagtail_nav_menus/models.py:148
+#: wagtail_nav_menus/models.py:160
 msgid "Navigation Menu"
 msgstr ""
 
 #. Translators: Model Name (plural)
-#: wagtail_nav_menus/models.py:150
+#: wagtail_nav_menus/models.py:162
 msgid "Navigation Menus"
 msgstr ""
 
