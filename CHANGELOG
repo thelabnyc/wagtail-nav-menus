@@ -1,4 +1,9 @@
+# 3.9
+
+- Add support for Wagtail 3.
+
 # 3.8
+
 - Nav menu choices now customizable
 - Can now add choices to Nav Categories exclusively
 
