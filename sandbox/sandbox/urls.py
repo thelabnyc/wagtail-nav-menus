@@ -16,16 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from django.conf.urls import include, url
+from django.urls import include, re_path
 from wagtail.core import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.search.signal_handlers import register_signal_handlers as wagtailsearch_register_signal_handlers
 wagtailsearch_register_signal_handlers()
 
 urlpatterns = [
-    url(r'^django-admin/', admin.site.urls),
-    url(r'^admin/', include(wagtailadmin_urls)),
-    url(r'', include(wagtail_urls)),
+    re_path(r'^django-admin/', admin.site.urls),
+    re_path(r'^admin/', include(wagtailadmin_urls)),
+    re_path(r'', include(wagtail_urls)),
 ]
 
 if settings.DEBUG:
