@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-18 18:05+0000\n"
+"POT-Creation-Date: 2022-09-15 19:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,27 +19,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Translators: Backend Library Name
-#: wagtail_nav_menus/config.py:8
+#: wagtail_nav_menus/apps.py:8
 msgid "Wagtail Navigation Menus"
 msgstr ""
 
 #. Translators: Navigation Menu Item Type
-#: wagtail_nav_menus/models.py:40
+#: wagtail_nav_menus/models.py:46
 msgid "Internal Page Block"
 msgstr ""
 
 #. Translators: Navigation Menu Item Type
-#: wagtail_nav_menus/models.py:55
+#: wagtail_nav_menus/models.py:61
 msgid "External Page Block"
 msgstr ""
 
 #. Translators: Navigation Menu Item Type
-#: wagtail_nav_menus/models.py:65
+#: wagtail_nav_menus/models.py:71
 msgid "Django URL Block"
 msgstr ""
 
 #. Translators: Navigation Menu Item Type
-#: wagtail_nav_menus/models.py:87
+#: wagtail_nav_menus/models.py:93
 msgid "Relative URL Block"
 msgstr ""
 
@@ -49,15 +49,15 @@ msgid "Navigation Menu Category Block"
 msgstr ""
 
 #. Translators: Model Name (singular)
-#: wagtail_nav_menus/models.py:160
+#: wagtail_nav_menus/models.py:163
 msgid "Navigation Menu"
 msgstr ""
 
 #. Translators: Model Name (plural)
-#: wagtail_nav_menus/models.py:162
+#: wagtail_nav_menus/models.py:165
 msgid "Navigation Menus"
 msgstr ""
 
-#: wagtail_nav_menus/wagtail_hooks.py:9
+#: wagtail_nav_menus/wagtail_hooks.py:8
 msgid "Nav Menu"
 msgstr ""
