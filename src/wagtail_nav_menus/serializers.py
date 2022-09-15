@@ -8,4 +8,4 @@ class NavMenuSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = NavMenu
-        fields = ('site', 'name', 'menu')
+        fields = ("site", "name", "menu")

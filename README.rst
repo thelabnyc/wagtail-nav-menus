@@ -89,4 +89,3 @@ If using Django Rest Framework to access the menu data, this module provides som
 Add NavMenuViewSet to your Rest Framework Router. ::
 
     from wagtail_nav_menus.viewsets import NavMenuViewSet
-

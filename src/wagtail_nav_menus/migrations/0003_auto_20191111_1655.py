@@ -8,13 +8,17 @@ import wagtail_nav_menus.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wagtail_nav_menus', '0002_auto_20190911_1745'),
+        ("wagtail_nav_menus", "0002_auto_20190911_1745"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='navmenu',
-            name='site',
-            field=models.ForeignKey(default=wagtail_nav_menus.models.site_default_id, on_delete=django.db.models.deletion.CASCADE, to='wagtailcore.Site'),
+            model_name="navmenu",
+            name="site",
+            field=models.ForeignKey(
+                default=wagtail_nav_menus.models.site_default_id,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="wagtailcore.Site",
+            ),
         ),
     ]
