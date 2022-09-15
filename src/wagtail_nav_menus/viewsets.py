@@ -9,7 +9,7 @@ class NavMenuViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = NavMenuSerializer
 
     def get_queryset(self):
-        site_id = self.request.GET.get('site', None)
+        site_id = self.request.GET.get("site", None)
         site = Site.find_for_request(self.request)
         if site_id:
             try:
