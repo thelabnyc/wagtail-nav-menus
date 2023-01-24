@@ -12,7 +12,7 @@ from versiontag import get_version, cache_git_tag  # NOQA
 packages = find_packages("src")
 
 install_requires = [
-    "wagtail>=2.7,<4.0",
+    "wagtail>=2.7,<4.1",
 ]
 extras_require = {
     "development": ["flake8>=3.3.0", "tox>=2.7.0", "ipdb"],
