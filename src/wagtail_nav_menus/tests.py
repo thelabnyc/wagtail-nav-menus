@@ -1,6 +1,6 @@
 from django.test import TestCase
 from rest_framework.test import APIRequestFactory
-from wagtail.core.models import Site, Page
+from wagtail.models import Site, Page
 from .viewsets import NavMenuViewSet
 from .models import NavMenu
 import json

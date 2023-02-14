@@ -5,3 +5,6 @@ translations:
 	cd src/wagtail_nav_menus && \
 	django-admin makemessages -a && \
 	django-admin compilemessages
+
+makemigrations:
+	docker-compose run web python sandbox/manage.py makemigrations

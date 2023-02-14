@@ -4,24 +4,16 @@ from django.conf import settings
 from django.urls import reverse
 from django.urls import NoReverseMatch
 from django.utils.translation import gettext_lazy as _
-from wagtail import VERSION as WAGTAIL_VERSION
-from wagtail.core.fields import StreamField
-from wagtail.core import blocks
-from wagtail.core.models import Site
-from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.fields import StreamField
+from wagtail import blocks
+from wagtail.models import Site
+from wagtail.admin.panels import FieldPanel
 from .loading import get_class
 from .utils import date_handler
 from .defaults import (
     WAGTAIL_NAV_MENU_TYPES_DEFAULT,
     WAGTAIL_NAV_MENU_CHOICES_DEFAULT,
 )
-
-# See "Removal of special-purpose field panel types"
-# https://docs.wagtail.org/en/stable/releases/3.0.html#removal-of-special-purpose-field-panel-types
-if WAGTAIL_VERSION[0] >= 3:
-    from wagtail.admin.panels import FieldPanel as StreamFieldPanel  # NOQA
-else:
-    from wagtail.admin.edit_handlers import StreamFieldPanel  # NOQA
 
 
 NAV_MENU_CHOICES = getattr(
@@ -149,13 +141,14 @@ class AbstractNavMenu(models.Model):
         [
             ("nav_category", NavCategoryBlock()),
         ]
-        + nav_content
+        + nav_content,
+        use_json_field=True,
     )
 
     panels = [
         FieldPanel("site"),
         FieldPanel("name"),
-        StreamFieldPanel("menu"),
+        FieldPanel("menu"),
     ]
 
     class Meta:
