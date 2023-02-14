@@ -3,8 +3,8 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import wagtail.core.blocks
-import wagtail.core.fields
+import wagtail.blocks
+import wagtail.fields
 import wagtail.images.blocks
 
 
@@ -37,13 +37,13 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "menu",
-                    wagtail.core.fields.StreamField(
+                    wagtail.fields.StreamField(
                         (
                             (
                                 "heading",
-                                wagtail.core.blocks.CharBlock(classname="full title"),
+                                wagtail.blocks.CharBlock(classname="full title"),
                             ),
-                            ("paragraph", wagtail.core.blocks.RichTextBlock()),
+                            ("paragraph", wagtail.blocks.RichTextBlock()),
                             ("image", wagtail.images.blocks.ImageChooserBlock()),
                         )
                     ),

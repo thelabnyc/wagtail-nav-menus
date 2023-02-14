@@ -4,7 +4,7 @@ WAGTAIL_NAV_MENU_TYPES_DEFAULT = [
     ("django_url", "wagtail_nav_menus.models", "DjangoURLBlock"),
     ("relative_url", "wagtail_nav_menus.models", "RelativeURLBlock"),
     ("image", "wagtail.images.blocks", "ImageChooserBlock"),
-    ("html", "wagtail.core.blocks", "RawHTMLBlock"),
+    ("html", "wagtail.blocks", "RawHTMLBlock"),
 ]
 
 WAGTAIL_NAV_MENU_CHOICES_DEFAULT = [

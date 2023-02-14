@@ -2,8 +2,8 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-import wagtail.core.blocks
-import wagtail.core.fields
+import wagtail.blocks
+import wagtail.fields
 import wagtail.images.blocks
 import wagtail_nav_menus.models
 
@@ -58,105 +58,105 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="navmenu",
             name="menu",
-            field=wagtail.core.fields.StreamField(
+            field=wagtail.fields.StreamField(
                 [
                     (
                         "nav_category",
-                        wagtail.core.blocks.StructBlock(
+                        wagtail.blocks.StructBlock(
                             [
-                                ("title", wagtail.core.blocks.CharBlock()),
+                                ("title", wagtail.blocks.CharBlock()),
                                 (
                                     "sub_nav",
-                                    wagtail.core.blocks.StreamBlock(
+                                    wagtail.blocks.StreamBlock(
                                         [
                                             (
                                                 "page_link",
-                                                wagtail.core.blocks.StructBlock(
+                                                wagtail.blocks.StructBlock(
                                                     [
                                                         (
                                                             "override_title",
-                                                            wagtail.core.blocks.CharBlock(
+                                                            wagtail.blocks.CharBlock(
                                                                 required=False
                                                             ),
                                                         ),
                                                         (
                                                             "open_in_new_tab",
-                                                            wagtail.core.blocks.BooleanBlock(
+                                                            wagtail.blocks.BooleanBlock(
                                                                 required=False
                                                             ),
                                                         ),
                                                         (
                                                             "page",
-                                                            wagtail.core.blocks.PageChooserBlock(),
+                                                            wagtail.blocks.PageChooserBlock(),
                                                         ),
                                                     ]
                                                 ),
                                             ),
                                             (
                                                 "external_link",
-                                                wagtail.core.blocks.StructBlock(
+                                                wagtail.blocks.StructBlock(
                                                     [
                                                         (
                                                             "override_title",
-                                                            wagtail.core.blocks.CharBlock(
+                                                            wagtail.blocks.CharBlock(
                                                                 required=False
                                                             ),
                                                         ),
                                                         (
                                                             "open_in_new_tab",
-                                                            wagtail.core.blocks.BooleanBlock(
+                                                            wagtail.blocks.BooleanBlock(
                                                                 required=False
                                                             ),
                                                         ),
                                                         (
                                                             "link",
-                                                            wagtail.core.blocks.URLBlock(),
+                                                            wagtail.blocks.URLBlock(),
                                                         ),
                                                     ]
                                                 ),
                                             ),
                                             (
                                                 "django_url",
-                                                wagtail.core.blocks.StructBlock(
+                                                wagtail.blocks.StructBlock(
                                                     [
                                                         (
                                                             "override_title",
-                                                            wagtail.core.blocks.CharBlock(
+                                                            wagtail.blocks.CharBlock(
                                                                 required=False
                                                             ),
                                                         ),
                                                         (
                                                             "open_in_new_tab",
-                                                            wagtail.core.blocks.BooleanBlock(
+                                                            wagtail.blocks.BooleanBlock(
                                                                 required=False
                                                             ),
                                                         ),
                                                         (
                                                             "url_name",
-                                                            wagtail.core.blocks.CharBlock(),
+                                                            wagtail.blocks.CharBlock(),
                                                         ),
                                                     ]
                                                 ),
                                             ),
                                             (
                                                 "relative_url",
-                                                wagtail.core.blocks.StructBlock(
+                                                wagtail.blocks.StructBlock(
                                                     [
                                                         (
                                                             "override_title",
-                                                            wagtail.core.blocks.CharBlock(
+                                                            wagtail.blocks.CharBlock(
                                                                 required=False
                                                             ),
                                                         ),
                                                         (
                                                             "open_in_new_tab",
-                                                            wagtail.core.blocks.BooleanBlock(
+                                                            wagtail.blocks.BooleanBlock(
                                                                 required=False
                                                             ),
                                                         ),
                                                         (
                                                             "link",
-                                                            wagtail.core.blocks.RegexBlock(
+                                                            wagtail.blocks.RegexBlock(
                                                                 error_mesage={
                                                                     "invalid": "Not a relative URL"
                                                                 },
@@ -172,7 +172,7 @@ class Migration(migrations.Migration):
                                             ),
                                             (
                                                 "html",
-                                                wagtail.core.blocks.RawHTMLBlock(),
+                                                wagtail.blocks.RawHTMLBlock(),
                                             ),
                                         ]
                                     ),
@@ -182,67 +182,67 @@ class Migration(migrations.Migration):
                     ),
                     (
                         "page_link",
-                        wagtail.core.blocks.StructBlock(
+                        wagtail.blocks.StructBlock(
                             [
                                 (
                                     "override_title",
-                                    wagtail.core.blocks.CharBlock(required=False),
+                                    wagtail.blocks.CharBlock(required=False),
                                 ),
                                 (
                                     "open_in_new_tab",
-                                    wagtail.core.blocks.BooleanBlock(required=False),
+                                    wagtail.blocks.BooleanBlock(required=False),
                                 ),
-                                ("page", wagtail.core.blocks.PageChooserBlock()),
+                                ("page", wagtail.blocks.PageChooserBlock()),
                             ]
                         ),
                     ),
                     (
                         "external_link",
-                        wagtail.core.blocks.StructBlock(
+                        wagtail.blocks.StructBlock(
                             [
                                 (
                                     "override_title",
-                                    wagtail.core.blocks.CharBlock(required=False),
+                                    wagtail.blocks.CharBlock(required=False),
                                 ),
                                 (
                                     "open_in_new_tab",
-                                    wagtail.core.blocks.BooleanBlock(required=False),
+                                    wagtail.blocks.BooleanBlock(required=False),
                                 ),
-                                ("link", wagtail.core.blocks.URLBlock()),
+                                ("link", wagtail.blocks.URLBlock()),
                             ]
                         ),
                     ),
                     (
                         "django_url",
-                        wagtail.core.blocks.StructBlock(
+                        wagtail.blocks.StructBlock(
                             [
                                 (
                                     "override_title",
-                                    wagtail.core.blocks.CharBlock(required=False),
+                                    wagtail.blocks.CharBlock(required=False),
                                 ),
                                 (
                                     "open_in_new_tab",
-                                    wagtail.core.blocks.BooleanBlock(required=False),
+                                    wagtail.blocks.BooleanBlock(required=False),
                                 ),
-                                ("url_name", wagtail.core.blocks.CharBlock()),
+                                ("url_name", wagtail.blocks.CharBlock()),
                             ]
                         ),
                     ),
                     (
                         "relative_url",
-                        wagtail.core.blocks.StructBlock(
+                        wagtail.blocks.StructBlock(
                             [
                                 (
                                     "override_title",
-                                    wagtail.core.blocks.CharBlock(required=False),
+                                    wagtail.blocks.CharBlock(required=False),
                                 ),
                                 (
                                     "open_in_new_tab",
-                                    wagtail.core.blocks.BooleanBlock(required=False),
+                                    wagtail.blocks.BooleanBlock(required=False),
                                 ),
                                 (
                                     "link",
-                                    wagtail.core.blocks.RegexBlock(
+                                    wagtail.blocks.RegexBlock(
                                         error_mesage={"invalid": "Not a relative URL"},
                                         regex="^(?!www\\.|(?:http|ftp)s?://|[A-Za-z]:\\\\|//).*",
                                     ),
@@ -251,7 +251,7 @@ class Migration(migrations.Migration):
                         ),
                     ),
                     ("image", wagtail.images.blocks.ImageChooserBlock()),
-                    ("html", wagtail.core.blocks.RawHTMLBlock()),
+                    ("html", wagtail.blocks.RawHTMLBlock()),
                 ]
             ),
         ),

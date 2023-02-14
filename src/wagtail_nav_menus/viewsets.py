@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from wagtail.core.models import Site
+from wagtail.models import Site
 from wagtail_nav_menus.models import NavMenu
 from wagtail_nav_menus.serializers import NavMenuSerializer
 

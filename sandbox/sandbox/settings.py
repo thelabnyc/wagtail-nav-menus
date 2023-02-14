@@ -22,7 +22,7 @@ INSTALLED_APPS = [
     "taggit",
     "modelcluster",
     "sandbox",
-    "wagtail.core",
+    "wagtail",
     "wagtail.admin",
     "wagtail.documents",
     "wagtail.snippets",
@@ -49,7 +49,7 @@ MIDDLEWARE = [
 ]
 if wagtail.VERSION[0] == 2 and wagtail.VERSION[1] < 9:
     MIDDLEWARE += [
-        "wagtail.core.middleware.SiteMiddleware",
+        "wagtail.middleware.SiteMiddleware",
     ]
 MIDDLEWARE += [
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
