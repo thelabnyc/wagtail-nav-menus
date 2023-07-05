@@ -9,11 +9,11 @@ class NavMenuViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = NavMenuSerializer
 
     def get_queryset(self):
-        site_id = self.request.GET.get("site", None)
+        site_hostname = self.request.GET.get("site", None)
         site = Site.find_for_request(self.request)
-        if site_id:
+        if site_hostname:
             try:
-                site = Site.objects.get(id=site_id)
+                site = Site.objects.get(hostname=site_hostname)
             except Site.DoesNotExist:
                 pass
         qs = super().get_queryset()
