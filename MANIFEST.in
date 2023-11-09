@@ -1,3 +1,0 @@
-recursive-include src/wagtail_nav_menus/ *.html
-recursive-include src/wagtail_nav_menus/static *
-recursive-include src/wagtail_nav_menus/locale *.po *.mo
