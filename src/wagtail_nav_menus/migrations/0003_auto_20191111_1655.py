@@ -6,7 +6,6 @@ import wagtail_nav_menus.models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("wagtail_nav_menus", "0002_auto_20190911_1745"),
     ]
