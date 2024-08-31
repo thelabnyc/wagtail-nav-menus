@@ -59,6 +59,8 @@ Breaking change - support wagtail 2.x. For wagtail 1.x use version 1.1.
 
 added "menu_name" context variable to template tag
 
+## v3.11.1 (2024-08-31)
+
 ## v3.11.1b0 (2024-08-08)
 
 ### Fix
