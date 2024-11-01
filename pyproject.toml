@@ -18,7 +18,7 @@ from = "src"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-wagtail = ">=5.2,<6.4"
+wagtail = ">=5.2.6,<6.4"
 wagtail-modeladmin = "^2.1.0"
 
 [tool.poetry.group.dev.dependencies]
