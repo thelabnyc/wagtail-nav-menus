@@ -3,11 +3,14 @@
 import sys
 import traceback
 from importlib import import_module
+from typing import Type
+from types import ModuleType
 
 from django.apps import apps
 from django.apps.config import MODELS_MODULE_NAME
 from django.conf import settings
 from django.core.exceptions import AppRegistryNotReady
+from django.db.models import Model
 
 
 class ModuleNotFoundError(Exception):
@@ -22,7 +25,9 @@ class ClassNotFoundError(Exception):
     pass
 
 
-def get_class(module_label, classname, module_prefix="oscar.apps"):
+def get_class(
+    module_label: str, classname: str, module_prefix: str = "oscar.apps"
+) -> Type[object]:
     """
     Dynamically import a single class from the given module.
 
@@ -40,7 +45,9 @@ def get_class(module_label, classname, module_prefix="oscar.apps"):
     return get_classes(module_label, [classname], module_prefix)[0]
 
 
-def get_classes(module_label, classnames, module_prefix="oscar.apps"):
+def get_classes(
+    module_label: str, classnames: list[str], module_prefix: str = "oscar.apps"
+) -> list[Type[object]]:
     """
     Dynamically import a list of classes from the given module.
 
@@ -122,7 +129,7 @@ def get_classes(module_label, classnames, module_prefix="oscar.apps"):
     return _pluck_classes([local_module, oscar_module], classnames)
 
 
-def _import_module(module_label, classnames):
+def _import_module(module_label: str, classnames: list[str]) -> ModuleType | None:
     """
     Imports the module with the given name.
     Returns None if the module doesn't exist, but propagates any import errors.
@@ -142,13 +149,16 @@ def _import_module(module_label, classnames):
         # Fortunately, the traceback of the ImportError starts at __import__
         # statement. If the traceback has more than one frame, it means that
         # application was found and ImportError originates within the local app
-        __, __, exc_traceback = sys.exc_info()
+        _, _, exc_traceback = sys.exc_info()
         frames = traceback.extract_tb(exc_traceback)
         if len(frames) > 1:
             raise
+        return None
 
 
-def _pluck_classes(modules, classnames):
+def _pluck_classes(
+    modules: list[ModuleType | None], classnames: list[str]
+) -> list[Type[object]]:
     """
     Gets a list of class names and a list of modules to pick from.
     For each class name, will return the class from the first module that has a
@@ -170,7 +180,7 @@ def _pluck_classes(modules, classnames):
     return klasses
 
 
-def _get_installed_apps_entry(app_name):
+def _get_installed_apps_entry(app_name: str) -> str | None:
     """
     Given an app name (e.g. 'catalogue'), walk through INSTALLED_APPS
     and return the first match, or None.
@@ -185,7 +195,7 @@ def _get_installed_apps_entry(app_name):
     return None
 
 
-def _find_installed_apps_entry(module_label):
+def _find_installed_apps_entry(module_label: str) -> tuple[str, str]:
     """
     Given a module label, finds the best matching INSTALLED_APPS entry.
 
@@ -206,7 +216,7 @@ def _find_installed_apps_entry(module_label):
     raise AppNotFoundError("Couldn't find an app to import %s from" % module_label)
 
 
-def get_profile_class():
+def get_profile_class() -> Type[Model] | None:
     """
     Return the profile model class
     """
@@ -218,18 +228,21 @@ def get_profile_class():
     setting = getattr(settings, "AUTH_PROFILE_MODULE", None)
     if setting is None:
         return None
-    app_label, model_name = settings.AUTH_PROFILE_MODULE.split(".")
+    app_label, model_name = setting.split(".")
     return get_model(app_label, model_name)
 
 
-def feature_hidden(feature_name):
+def feature_hidden(feature_name: str | None) -> bool:
     """
     Test if a certain Oscar feature is disabled.
     """
-    return feature_name is not None and feature_name in settings.OSCAR_HIDDEN_FEATURES
+    setting = getattr(settings, "OSCAR_HIDDEN_FEATURES", None)
+    if setting is None:
+        return False
+    return feature_name is not None and feature_name in setting
 
 
-def get_model(app_label, model_name):
+def get_model(app_label: str, model_name: str) -> Type[Model]:
     """
     Fetches a Django model using the app registry.
 
@@ -262,7 +275,7 @@ def get_model(app_label, model_name):
             raise
 
 
-def is_model_registered(app_label, model_name):
+def is_model_registered(app_label: str, model_name: str) -> bool:
     """
     Checks whether a given model is registered. This is used to only
     register Oscar models if they aren't overridden by a forked app.

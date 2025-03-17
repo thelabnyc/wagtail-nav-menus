@@ -1,4 +1,6 @@
 import json
+from typing import Any
+
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
@@ -6,8 +8,9 @@ from django.urls import NoReverseMatch
 from django.utils.translation import gettext_lazy as _
 from wagtail.fields import StreamField
 from wagtail import blocks
-from wagtail.models import Site
+from wagtail.models import Page, Site
 from wagtail.admin.panels import FieldPanel
+
 from .loading import get_class
 from .utils import date_handler
 from .defaults import (
@@ -37,7 +40,7 @@ class InternalPageBlock(AbstractPageBlock):
         # Translators: Navigation Menu Item Type
         verbose_name = _("Internal Page Block")
 
-    def get_serializable_data(self, obj):
+    def get_serializable_data(self, obj: dict[str, Page]) -> dict[str, Page]:
         page = obj["page"]
         result = obj
         result["page"] = page.serializable_data()
@@ -62,7 +65,7 @@ class DjangoURLBlock(AbstractPageBlock):
         # Translators: Navigation Menu Item Type
         verbose_name = _("Django URL Block")
 
-    def get_serializable_data(self, obj):
+    def get_serializable_data(self, obj: dict[str, str]) -> dict[str, str]:
         url_name = obj["url_name"]
         result = obj
         try:
@@ -115,15 +118,16 @@ class NavCategoryBlock(blocks.StructBlock):
         verbose_name = _("Navigation Menu Category Block")
 
 
-def site_default():
+def site_default() -> Site | None:
     return Site.objects.filter(is_default_site=True).first()
 
 
-def site_default_id():
+def site_default_id() -> int | None:
     """Not sure why this is needed for migrations, there is probably a better way."""
     site = site_default()
-    if site:
+    if site and isinstance(site.id, int):
         return site.id
+    return None
 
 
 class AbstractNavMenu(models.Model):
@@ -163,10 +167,10 @@ class AbstractNavMenu(models.Model):
         abstract = True
         app_label = "wagtail_nav_menus"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
-    def stream_field_to_json(self, stream_field):
+    def stream_field_to_json(self, stream_field: StreamField) -> dict[str, Any]:
         """Recursive function to turn the menu stream field into json"""
         row = {}
         row["type"] = stream_field.block_type
@@ -188,7 +192,7 @@ class AbstractNavMenu(models.Model):
             row["value"]["sub_nav"] = sub_nav
         return row
 
-    def to_json(self):
+    def to_json(self) -> str:
         """JSON representation of menu stream field"""
         result = []
         for stream_field in self.menu:
