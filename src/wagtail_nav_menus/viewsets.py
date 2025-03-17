@@ -1,14 +1,15 @@
+from django.db.models import QuerySet
 from rest_framework import viewsets
 from wagtail.models import Site
 from wagtail_nav_menus.models import NavMenu
 from wagtail_nav_menus.serializers import NavMenuSerializer
 
 
-class NavMenuViewSet(viewsets.ReadOnlyModelViewSet):
+class NavMenuViewSet(viewsets.ReadOnlyModelViewSet[NavMenu]):
     queryset = NavMenu.objects.all()
     serializer_class = NavMenuSerializer
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet[NavMenu]:
         site_hostname = self.request.GET.get("site", None)
         site = Site.find_for_request(self.request)
         if site_hostname:

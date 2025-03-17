@@ -3,7 +3,7 @@ from wagtail.api.v2.serializers import StreamField as StreamFieldSerializer
 from .models import NavMenu
 
 
-class NavMenuSerializer(serializers.ModelSerializer):
+class NavMenuSerializer(serializers.ModelSerializer[NavMenu]):
     menu = StreamFieldSerializer()
 
     class Meta:
