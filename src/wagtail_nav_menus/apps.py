@@ -6,3 +6,4 @@ class Config(AppConfig):
     name = "wagtail_nav_menus"
     # Translators: Backend Library Name
     verbose_name = _("Wagtail Navigation Menus")
+    default_auto_field = "django.db.models.AutoField"
