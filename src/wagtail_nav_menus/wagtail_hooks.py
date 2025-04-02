@@ -1,4 +1,4 @@
-from typing import Callable, Type
+from collections.abc import Callable
 
 from django.utils.translation import gettext_lazy as _
 from wagtail_modeladmin.options import ModelAdmin, modeladmin_register
@@ -15,7 +15,7 @@ class NavMenuAdmin(ModelAdmin):
     list_display = ("name", "site")  # type: ignore[assignment]
 
 
-_modeladmin_register: Callable[[Type[ModelAdmin]], Type[ModelAdmin]] = (
+_modeladmin_register: Callable[[type[ModelAdmin]], type[ModelAdmin]] = (
     modeladmin_register
 )
 

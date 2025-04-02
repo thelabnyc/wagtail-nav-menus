@@ -9,4 +9,4 @@ def date_handler(obj: DateTimeLike) -> str:
     if hasattr(obj, "isoformat"):
         return obj.isoformat()
     else:
-        raise TypeError("Unserializable object {} of type {}".format(obj, type(obj)))
+        raise TypeError(f"Unserializable object {obj} of type {type(obj)}")

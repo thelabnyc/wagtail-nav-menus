@@ -3,7 +3,6 @@
 import sys
 import traceback
 from importlib import import_module
-from typing import Type
 from types import ModuleType
 
 from django.apps import apps
@@ -27,7 +26,7 @@ class ClassNotFoundError(Exception):
 
 def get_class(
     module_label: str, classname: str, module_prefix: str = "oscar.apps"
-) -> Type[object]:
+) -> type[object]:
     """
     Dynamically import a single class from the given module.
 
@@ -47,7 +46,7 @@ def get_class(
 
 def get_classes(
     module_label: str, classnames: list[str], module_prefix: str = "oscar.apps"
-) -> list[Type[object]]:
+) -> list[type[object]]:
     """
     Dynamically import a list of classes from the given module.
 
@@ -99,7 +98,7 @@ def get_classes(
 
     # import from Oscar package (should succeed in most cases)
     # e.g. 'oscar.apps.dashboard.catalogue.forms'
-    oscar_module_label = "%s.%s" % (module_prefix, module_label)
+    oscar_module_label = f"{module_prefix}.{module_label}"
     oscar_module = _import_module(oscar_module_label, classnames)
 
     # returns e.g. 'oscar.apps.dashboard.catalogue',
@@ -158,7 +157,7 @@ def _import_module(module_label: str, classnames: list[str]) -> ModuleType | Non
 
 def _pluck_classes(
     modules: list[ModuleType | None], classnames: list[str]
-) -> list[Type[object]]:
+) -> list[type[object]]:
     """
     Gets a list of class names and a list of modules to pick from.
     For each class name, will return the class from the first module that has a
@@ -174,7 +173,7 @@ def _pluck_classes(
         if not klass:
             packages = [m.__name__ for m in modules if m is not None]
             raise ClassNotFoundError(
-                "No class '%s' found in %s" % (classname, ", ".join(packages))
+                "No class '{}' found in {}".format(classname, ", ".join(packages))
             )
         klasses.append(klass)
     return klasses
@@ -216,7 +215,7 @@ def _find_installed_apps_entry(module_label: str) -> tuple[str, str]:
     raise AppNotFoundError("Couldn't find an app to import %s from" % module_label)
 
 
-def get_profile_class() -> Type[Model] | None:
+def get_profile_class() -> type[Model] | None:
     """
     Return the profile model class
     """
@@ -242,7 +241,7 @@ def feature_hidden(feature_name: str | None) -> bool:
     return feature_name is not None and feature_name in setting
 
 
-def get_model(app_label: str, model_name: str) -> Type[Model]:
+def get_model(app_label: str, model_name: str) -> type[Model]:
     """
     Fetches a Django model using the app registry.
 
@@ -265,7 +264,7 @@ def get_model(app_label: str, model_name: str) -> Type[Model]:
             app_config = apps.get_app_config(app_label)
             # `app_config.import_models()` cannot be used here because it
             # would interfere with `apps.populate()`.
-            import_module("%s.%s" % (app_config.name, MODELS_MODULE_NAME))
+            import_module(f"{app_config.name}.{MODELS_MODULE_NAME}")
             # In order to account for case-insensitivity of model_name,
             # look up the model through a private API of the app registry.
             return apps.get_registered_model(app_label, model_name)
