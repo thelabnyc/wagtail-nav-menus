@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "wagtail-nav-menus"
-version = "3.12.1"
+version = "3.13.0"
 description = "Wagtail Nav Menus is a app to provide highly customizable menus in wagtail by leveraging StreamFields."
 authors = ["thelab <thelabdev@thelab.co>"]
 readme = "README.rst"
@@ -34,8 +34,8 @@ name = "cz_conventional_commits"
 annotated_tag = true
 gpg_sign = true
 tag_format = "v$version"
-update_changelog_on_bump = true
-changelog_merge_prerelease = true
+update_changelog_on_bump = false
+changelog_merge_prerelease = false
 version_provider = "poetry"
 version_scheme = "pep440"
 version_files = [
