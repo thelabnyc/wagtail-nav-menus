@@ -2,7 +2,8 @@ from typing import TypedDict
 
 from django import template
 from django.http import HttpRequest
-from wagtail.models import Page, Site, StreamField
+from wagtail.fields import StreamField
+from wagtail.models import Page, Site
 
 from ..models import NavMenu
 
