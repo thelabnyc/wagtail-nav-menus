@@ -1,3 +1,9 @@
+## v3.13.2 (2025-06-02)
+
+### Fix
+
+- update docker image tag format
+
 ## v3.13.1 (2025-04-03)
 
 ### Fix
