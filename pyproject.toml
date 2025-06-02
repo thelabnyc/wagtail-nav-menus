@@ -25,7 +25,7 @@ wagtail-modeladmin = "^2.1.0"
 flake8 = "==7.2.0"
 tox = "==4.26.0"
 ipdb = "0.13.13"
-mypy = "1.15.0"
+mypy = "1.16.0"
 django-stubs = "5.2.0"
 djangorestframework-stubs = "3.16.0"
 
