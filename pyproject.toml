@@ -23,7 +23,7 @@ wagtail-modeladmin = "^2.1.0"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "==7.2.0"
-tox = "==4.26.0"
+tox = "==4.27.0"
 ipdb = "0.13.13"
 mypy = "1.16.1"
 django-stubs = "5.2.0"
