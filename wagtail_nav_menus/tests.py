@@ -1,10 +1,12 @@
+import json
+
 from django.test import TestCase
 from rest_framework.test import APIRequestFactory
-from wagtail.models import Site, Page
-from .viewsets import NavMenuViewSet
-from .models import NavMenu
-import json
+from wagtail.models import Page, Site
 import wagtail
+
+from .models import NavMenu
+from .viewsets import NavMenuViewSet
 
 
 class NavMenuTestCase(TestCase):
@@ -113,15 +115,9 @@ class NavMenuTestCase(TestCase):
         }
         result = self.json_after_create_menu(source)
         self.assertEqual(result["type"], expected["type"])
-        self.assertEqual(
-            result["value"]["open_in_new_tab"], expected["value"]["open_in_new_tab"]
-        )
-        self.assertEqual(
-            result["value"]["override_title"], expected["value"]["override_title"]
-        )
-        self.assertEqual(
-            result["value"]["page"]["slug"], expected["value"]["page"]["slug"]
-        )
+        self.assertEqual(result["value"]["open_in_new_tab"], expected["value"]["open_in_new_tab"])
+        self.assertEqual(result["value"]["override_title"], expected["value"]["override_title"])
+        self.assertEqual(result["value"]["page"]["slug"], expected["value"]["page"]["slug"])
 
     def test_nav_category(self):
         source = {
@@ -233,9 +229,7 @@ class NavMenuViewSetTestCase(TestCase):
         """
         page = Page.objects.all().last()
         default_site = Site.objects.all().first()
-        other_site = Site.objects.create(
-            hostname="example.com", port=80, root_page=page
-        )
+        other_site = Site.objects.create(hostname="example.com", port=80, root_page=page)
         rdata = {
             "SERVER_NAME": other_site.hostname,
         }
@@ -254,9 +248,7 @@ class NavMenuViewSetTestCase(TestCase):
         """
         page = Page.objects.all().last()
         default_site = Site.objects.all().first()
-        other_site = Site.objects.create(
-            hostname="example.com", port=80, root_page=page
-        )
+        other_site = Site.objects.create(hostname="example.com", port=80, root_page=page)
         rdata = {
             "SERVER_NAME": other_site.hostname,
         }

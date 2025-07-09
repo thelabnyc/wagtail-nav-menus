@@ -15,8 +15,6 @@ class NavMenuAdmin(ModelAdmin):
     list_display = ("name", "site")  # type: ignore[assignment]
 
 
-_modeladmin_register: Callable[[type[ModelAdmin]], type[ModelAdmin]] = (
-    modeladmin_register
-)
+_modeladmin_register: Callable[[type[ModelAdmin]], type[ModelAdmin]] = modeladmin_register
 
 _modeladmin_register(NavMenuAdmin)

@@ -18,9 +18,7 @@ class NavMenuContext(TypedDict):
 
 
 @register.inclusion_tag("nav_menus/tags/menu.html", takes_context=True)
-def get_nav_menu(
-    context: template.Context, menu_name: str, calling_page: Page = None
-) -> NavMenuContext:
+def get_nav_menu(context: template.Context, menu_name: str, calling_page: Page = None) -> NavMenuContext:
     assert hasattr(context, "request")
     site = Site.find_for_request(context.request)
     nav_menu = NavMenu.objects.get_or_create(name=menu_name, site=site)[0]

@@ -5,6 +5,7 @@ import django.db.models.deletion
 import wagtail.blocks
 import wagtail.fields
 import wagtail.images.blocks
+
 import wagtail_nav_menus.models
 
 

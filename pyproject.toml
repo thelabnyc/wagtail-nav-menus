@@ -23,7 +23,7 @@ Repository = "https://gitlab.com/thelabnyc/wagtail-nav-menus"
 
 [dependency-groups]
 dev = [
-    "flake8 (==7.3.0)",
+    "ruff (>=0.11.6)",
     "tox==4.27.0",
     "ipdb (==0.13.13)",
     "mypy (==1.16.1)",
@@ -45,15 +45,9 @@ update_changelog_on_bump = true
 changelog_merge_prerelease = true
 version_provider = "pep621"
 version_scheme = "pep440"
-version_files = [
-    "pyproject.toml:version",
-]
-pre_bump_hooks = [
-    "pre-commit run --all-files || true",
-]
-post_bump_hooks = [
-    "git push origin master $CZ_POST_CURRENT_TAG_VERSION"
-]
+version_files = ["pyproject.toml:version"]
+pre_bump_hooks = ["pre-commit run --all-files || true"]
+post_bump_hooks = ["git push origin master $CZ_POST_CURRENT_TAG_VERSION"]
 
 [tool.mypy]
 python_version = "3.10"
@@ -96,3 +90,16 @@ follow_untyped_imports = true
 
 [tool.django-stubs]
 django_settings_module = "sandbox.sandbox.settings"
+
+[tool.isort]
+profile = "black"
+from_first = true
+
+[tool.ruff]
+line-length = 160
+extend-exclude = ["migrations"]
+
+[tool.ruff.lint]
+
+[tool.ruff.lint.isort]
+from-first = true
