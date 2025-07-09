@@ -1,6 +1,7 @@
 from django.db.models import QuerySet
 from rest_framework import viewsets
 from wagtail.models import Site
+
 from wagtail_nav_menus.models import NavMenu
 from wagtail_nav_menus.serializers import NavMenuSerializer
 

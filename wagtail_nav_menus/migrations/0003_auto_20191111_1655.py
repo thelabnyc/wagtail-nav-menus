@@ -2,6 +2,7 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
+
 import wagtail_nav_menus.models
 
 

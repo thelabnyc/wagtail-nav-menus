@@ -2,7 +2,7 @@ from typing import Protocol
 
 
 class DateTimeLike(Protocol):
-    def isoformat(self) -> str: ...  # noqa: E704
+    def isoformat(self) -> str: ...
 
 
 def date_handler(obj: DateTimeLike) -> str:

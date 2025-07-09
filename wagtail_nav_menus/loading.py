@@ -1,9 +1,9 @@
 # Copied from django-oscar
 
-import sys
-import traceback
 from importlib import import_module
 from types import ModuleType
+import sys
+import traceback
 
 from django.apps import apps
 from django.apps.config import MODELS_MODULE_NAME
@@ -24,9 +24,7 @@ class ClassNotFoundError(Exception):
     pass
 
 
-def get_class(
-    module_label: str, classname: str, module_prefix: str = "oscar.apps"
-) -> type[object]:
+def get_class(module_label: str, classname: str, module_prefix: str = "oscar.apps") -> type[object]:
     """
     Dynamically import a single class from the given module.
 
@@ -44,9 +42,7 @@ def get_class(
     return get_classes(module_label, [classname], module_prefix)[0]
 
 
-def get_classes(
-    module_label: str, classnames: list[str], module_prefix: str = "oscar.apps"
-) -> list[type[object]]:
+def get_classes(module_label: str, classnames: list[str], module_prefix: str = "oscar.apps") -> list[type[object]]:
     """
     Dynamically import a list of classes from the given module.
 
@@ -155,9 +151,7 @@ def _import_module(module_label: str, classnames: list[str]) -> ModuleType | Non
         return None
 
 
-def _pluck_classes(
-    modules: list[ModuleType | None], classnames: list[str]
-) -> list[type[object]]:
+def _pluck_classes(modules: list[ModuleType | None], classnames: list[str]) -> list[type[object]]:
     """
     Gets a list of class names and a list of modules to pick from.
     For each class name, will return the class from the first module that has a
@@ -172,9 +166,7 @@ def _pluck_classes(
                 break
         if not klass:
             packages = [m.__name__ for m in modules if m is not None]
-            raise ClassNotFoundError(
-                "No class '{}' found in {}".format(classname, ", ".join(packages))
-            )
+            raise ClassNotFoundError("No class '{}' found in {}".format(classname, ", ".join(packages)))
         klasses.append(klass)
     return klasses
 

@@ -1,27 +1,20 @@
-import json
 from typing import Any
+import json
 
-from django.db import models
 from django.conf import settings
-from django.urls import reverse
-from django.urls import NoReverseMatch
+from django.db import models
+from django.urls import NoReverseMatch, reverse
 from django.utils.translation import gettext_lazy as _
-from wagtail.fields import StreamField
 from wagtail import blocks
-from wagtail.models import Page, Site
 from wagtail.admin.panels import FieldPanel
+from wagtail.fields import StreamField
+from wagtail.models import Page, Site
 
+from .defaults import WAGTAIL_NAV_MENU_CHOICES_DEFAULT, WAGTAIL_NAV_MENU_TYPES_DEFAULT
 from .loading import get_class
 from .utils import date_handler
-from .defaults import (
-    WAGTAIL_NAV_MENU_TYPES_DEFAULT,
-    WAGTAIL_NAV_MENU_CHOICES_DEFAULT,
-)
 
-
-NAV_MENU_CHOICES = getattr(
-    settings, "WAGTAIL_NAV_MENU_CHOICES", WAGTAIL_NAV_MENU_CHOICES_DEFAULT
-)
+NAV_MENU_CHOICES = getattr(settings, "WAGTAIL_NAV_MENU_CHOICES", WAGTAIL_NAV_MENU_CHOICES_DEFAULT)
 
 
 class AbstractPageBlock(blocks.StructBlock):
@@ -79,18 +72,14 @@ URL_REGEX = r"^(?!www\.|(?:http|ftp)s?://|[A-Za-z]:\\|//).*"
 
 
 class RelativeURLBlock(AbstractPageBlock):
-    link = blocks.RegexBlock(
-        regex=URL_REGEX, error_mesage={"invalid": "Not a relative URL"}
-    )
+    link = blocks.RegexBlock(regex=URL_REGEX, error_mesage={"invalid": "Not a relative URL"})
 
     class Meta:
         # Translators: Navigation Menu Item Type
         verbose_name = _("Relative URL Block")
 
 
-NAV_MENU_TYPES = getattr(
-    settings, "WAGTAIL_NAV_MENU_TYPES", WAGTAIL_NAV_MENU_TYPES_DEFAULT
-)
+NAV_MENU_TYPES = getattr(settings, "WAGTAIL_NAV_MENU_TYPES", WAGTAIL_NAV_MENU_TYPES_DEFAULT)
 
 nav_content = []
 for name, module_label, class_name in NAV_MENU_TYPES:
