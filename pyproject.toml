@@ -23,7 +23,7 @@ Repository = "https://gitlab.com/thelabnyc/wagtail-nav-menus"
 
 [dependency-groups]
 dev = [
-    "ruff (>=0.11.6)",
+    "ruff (>=0.12.11)",
     "tox==4.29.0",
     "ipdb (==0.13.13)",
     "mypy (==1.17.1)",
