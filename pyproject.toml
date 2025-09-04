@@ -7,7 +7,7 @@ name = "wagtail-nav-menus"
 version = "3.13.2"
 description = "Wagtail Nav Menus is a app to provide highly customizable menus in wagtail by leveraging StreamFields."
 readme = "README.rst"
-dependencies = ["wagtail (>=7.0)", "wagtail-modeladmin (>=2.1.0,<3)"]
+dependencies = ["wagtail (>=7.0)", "wagtail-modeladmin (>=2.2.0,<3)"]
 requires-python = ">=3.11"
 
 [project.license]
