@@ -27,7 +27,7 @@ dev = [
     "tox==4.30.3",
     "ipdb (==0.13.13)",
     "mypy (==1.18.2)",
-    "django-stubs (==5.2.6)",
+    "django-stubs (==5.2.7)",
     "djangorestframework-stubs (==3.16.4)",
     "tox-uv>=1.28.0",
     "coverage>=7.10.7",
