@@ -29,7 +29,7 @@ dev = [
     "mypy (==1.18.2)",
     "django-stubs (==5.2.7)",
     "djangorestframework-stubs (==3.16.4)",
-    "tox-uv>=1.28.0",
+    "tox-uv>=1.29.0",
     "coverage>=7.10.7",
 ]
 
