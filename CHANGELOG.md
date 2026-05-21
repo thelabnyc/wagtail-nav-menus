@@ -1,3 +1,22 @@
+## v3.14.0 (2026-05-21)
+
+### Feat
+
+- add wagtail 7.4 LTS to test matrix
+- support Python 3.14
+
+### Fix
+
+- **deps**: update dependency wagtail-modeladmin to >=2.3.0,<3
+- **deps**: update dependency wagtail-modeladmin to >=2.2.0,<3
+- **deps**: update dependency wagtail to >=7.0
+- prevent renovate from pointing all URLs at gitlab
+
+### Refactor
+
+- migrate black/flake8 -> ruff
+- migrate from poetry -> uv
+
 ## v3.13.2 (2025-06-02)
 
 ### Fix
