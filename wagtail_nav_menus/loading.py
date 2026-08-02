@@ -101,7 +101,7 @@ def get_classes(module_label: str, classnames: list[str], module_prefix: str = "
     # 'yourproject.apps.dashboard.catalogue' or 'dashboard.catalogue',
     # depending on what is set in INSTALLED_APPS
     installed_apps_entry, app_name = _find_installed_apps_entry(module_label)
-    if installed_apps_entry.startswith("%s." % module_prefix):
+    if installed_apps_entry.startswith(f"{module_prefix}."):
         # The entry is obviously an Oscar one, we don't import again
         local_module = None
     else:
@@ -115,9 +115,9 @@ def get_classes(module_label: str, classnames: list[str], module_prefix: str = "
         # This intentionally doesn't raise an ImportError, because ImportError
         # can get masked in complex circular import scenarios.
         raise ModuleNotFoundError(
-            "The module with label '%s' could not be imported. This either"
+            f"The module with label '{module_label}' could not be imported. This either"
             "means that it indeed does not exist, or you might have a problem"
-            " with a circular import." % module_label
+            " with a circular import."
         )
 
     # return imported classes, giving preference to ones from the local package
@@ -204,7 +204,7 @@ def _find_installed_apps_entry(module_label: str) -> tuple[str, str]:
         entry = _get_installed_apps_entry(app_name)
         if entry:
             return entry, app_name
-    raise AppNotFoundError("Couldn't find an app to import %s from" % module_label)
+    raise AppNotFoundError(f"Couldn't find an app to import {module_label} from")
 
 
 def get_profile_class() -> type[Model] | None:
