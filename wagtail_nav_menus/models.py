@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, ClassVar
 import json
 
 from django.conf import settings
@@ -138,7 +138,7 @@ class AbstractNavMenu(models.Model):
         use_json_field=True,
     )
 
-    panels = [
+    panels: ClassVar = [
         FieldPanel("site"),
         FieldPanel("name"),
         FieldPanel("menu"),
