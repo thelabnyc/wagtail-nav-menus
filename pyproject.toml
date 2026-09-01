@@ -30,7 +30,7 @@ dev = [
     "django-stubs (==6.1.0)",
     "djangorestframework-stubs (==3.18.1)",
     "tox-uv>=1.36.0",
-    "coverage>=7.15.4",
+    "coverage>=7.16.0",
 ]
 
 [tool.hatch.build.targets.wheel]
