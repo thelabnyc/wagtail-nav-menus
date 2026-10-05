@@ -26,7 +26,7 @@ dev = [
     "ruff (>=0.16.10)",
     "tox==4.64.7",
     "ipdb (==0.13.13)",
-    "mypy (==2.3.1)",
+    "mypy (==2.4.0)",
     "django-stubs (==6.1.0)",
     "djangorestframework-stubs (==3.18.1)",
     "tox-uv>=1.36.1",
