@@ -1,3 +1,16 @@
+## v3.15.0 (2026-10-30)
+
+### Feat
+
+- support Wagtail 8.0 and Django 6.0/6.1, drop Wagtail 7.0
+- support Python 3.15 and drop Python 3.11
+
+### Fix
+
+- **types**: target Python 3.11 in mypy to match requires-python
+- **deps**: update dependency wagtail-modeladmin to >=2.5.0,<3
+- **deps**: update dependency wagtail-modeladmin to >=2.4.0,<3
+
 ## v3.14.0 (2026-05-21)
 
 ### Feat
