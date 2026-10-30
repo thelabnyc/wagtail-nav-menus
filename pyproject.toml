@@ -8,7 +8,7 @@ version = "3.14.0"
 description = "Wagtail Nav Menus is a app to provide highly customizable menus in wagtail by leveraging StreamFields."
 readme = "README.rst"
 dependencies = ["wagtail (>=7.0)", "wagtail-modeladmin (>=2.5.0,<3)"]
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 
 [project.license]
 text = "ISC"
@@ -55,7 +55,7 @@ pre_bump_hooks = ["prek run --all-files || true"]
 post_bump_hooks = ["git push origin master $CZ_POST_CURRENT_TAG_VERSION"]
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.12"
 plugins = ["mypy_django_plugin.main"]
 
 # Strict mode, see mypy --help
