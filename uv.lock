@@ -1611,7 +1611,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "wagtail", specifier = ">=7.0" },
+    { name = "wagtail", specifier = ">=7.4" },
     { name = "wagtail-modeladmin", specifier = ">=2.5.0,<3" },
 ]
 
