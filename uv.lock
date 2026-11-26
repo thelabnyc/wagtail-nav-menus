@@ -1623,7 +1623,7 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "coverage", specifier = ">=7.17.4" },
+    { name = "coverage", specifier = ">=7.17.5" },
     { name = "django-stubs", specifier = "==6.1.2" },
     { name = "djangorestframework-stubs", specifier = "==3.18.2" },
     { name = "ipdb", specifier = "==0.13.13" },
